@@ -1,0 +1,5 @@
+home=https://doc.gold.ac.uk/usr/423/
+about=https://doc.gold.ac.uk/usr/423/about
+login=https://doc.gold.ac.uk/usr/423/login
+exercises=https://doc.gold.ac.uk/usr/423/exercises
+logs=https://doc.gold.ac.uk/usr/423/logs
