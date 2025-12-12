@@ -2,11 +2,14 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
+// BASE PATH (for Goldsmiths /usr/423 deployment)
+const BASE_PATH = process.env.HEALTH_BASE_PATH || '';
+
 
 // LOGIN CHECK MIDDLEWARE
 function requireLogin(req, res, next) {
     if (!req.session.user) {
-        return res.redirect(`${BASE_PATH}/login`);
+        return res.redirect(BASE_PATH + '/login');
     }
     next();
 }
@@ -44,7 +47,7 @@ router.post('/login', (req, res) => {
         bcrypt.compare(password, user.password_hash, (err, match) => {
             if (match) {
                 req.session.user = { id: user.id, username: user.username };
-                return res.redirect('/');
+                return res.redirect(BASE_PATH + '/exercises');
             } else {
                 return res.render("login", { error: "Invalid username or password" });
             }
@@ -55,7 +58,7 @@ router.post('/login', (req, res) => {
 // LOGOUT
 router.get('/logout', (req, res) => {
     req.session.destroy(() => {
-        res.redirect('/');
+        res.redirect(BASE_PATH + '/');
     });
 });
 
@@ -72,7 +75,7 @@ router.post('/register', (req, res) => {
         return res.render('register', { error: "All fields required" });
     }
 
-    const db = req.db; 
+    const db = req.db;
 
     const checkSql = "SELECT * FROM users WHERE username = ?";
     db.query(checkSql, [username], (err, results) => {
@@ -98,7 +101,7 @@ router.post('/register', (req, res) => {
                     return res.render('register', { error: "Error saving user" });
                 }
 
-                res.redirect('/login');
+                res.redirect(BASE_PATH + '/login');
             });
         });
     });
