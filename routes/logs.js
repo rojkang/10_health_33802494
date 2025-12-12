@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { requireLogin } = require('./pages');
 
+// BASE PATH for Goldsmiths deployment
+const BASE_PATH = process.env.HEALTH_BASE_PATH || '';
+
+
 // VIEW ALL LOGS (JOIN exercises + logs)
 router.get('/', requireLogin, (req, res) => {
     const db = req.db;
@@ -24,11 +28,11 @@ router.get('/', requireLogin, (req, res) => {
     });
 });
 
+
 // ADD LOG FORM
 router.get('/add', requireLogin, (req, res) => {
     const db = req.db;
 
-    // Load exercises for the dropdown
     db.query("SELECT id, name FROM exercises", (err, results) => {
         if (err) return res.send("Database error");
 
@@ -40,6 +44,7 @@ router.get('/add', requireLogin, (req, res) => {
     });
 });
 
+
 // ADD LOG POST
 router.post('/add', requireLogin, (req, res) => {
     const db = req.db;
@@ -50,7 +55,7 @@ router.post('/add', requireLogin, (req, res) => {
     const notes = req.sanitize(req.body.notes);
 
     if (!exercise_id || !log_date || !pain_level) {
-        return res.redirect('/logs/add');
+        return res.redirect(BASE_PATH + '/logs/add');
     }
 
     const sql = `
@@ -58,19 +63,23 @@ router.post('/add', requireLogin, (req, res) => {
         VALUES (?, ?, ?, ?, ?)
     `;
 
-    db.query(sql,
+    db.query(
+        sql,
         [req.session.user.id, exercise_id, log_date, pain_level, notes],
         (err) => {
             if (err) return res.send("Database error");
-            res.redirect('/logs');
+
+            // ✅ FIXED redirect
+            res.redirect(BASE_PATH + '/logs');
         }
     );
 });
 
+
 // SEARCH LOGS
 router.get('/search', requireLogin, (req, res) => {
-    
     const db = req.db;
+
     const body_part = req.query.body_part || "";
     const minPain = req.query.minPain || "";
     const maxPain = req.query.maxPain || "";

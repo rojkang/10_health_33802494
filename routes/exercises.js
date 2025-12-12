@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { requireLogin } = require('./pages');
 
+// BASE PATH for Goldsmiths deployment
+const BASE_PATH = process.env.HEALTH_BASE_PATH || '';
+
+
 // VIEW ALL EXERCISES
 router.get('/', requireLogin, (req, res) => {
     const db = req.db;
@@ -31,7 +35,10 @@ router.post('/add', requireLogin, (req, res) => {
     const instructions = req.sanitize(req.body.instructions);
 
     if (!name || !body_part || !difficulty || !instructions) {
-        return res.render("exercises_add", { user: req.session.user, error: "All fields are required." });
+        return res.render("exercises_add", {
+            user: req.session.user,
+            error: "All fields are required."
+        });
     }
 
     const db = req.db;
@@ -41,10 +48,13 @@ router.post('/add', requireLogin, (req, res) => {
         [name, body_part, difficulty, instructions],
         (err) => {
             if (err) return res.send("Database error");
-            res.redirect('/exercises');
+
+            // ✅ FIXED redirect (this was causing the 404)
+            res.redirect(BASE_PATH + '/exercises');
         }
     );
 });
+
 
 // SEARCH EXERCISES
 router.get('/search', requireLogin, (req, res) => {
