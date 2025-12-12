@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <h1>Create Your Account</h1>
+    </header>
+
+    <div class="container">
+
+        <div class="card centered">
+
+            <h2>Register</h2>
+
+            <form action="/register" method="POST" style="margin-top: 15px;">
+
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="username" required><br><br>
+
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required><br><br>
+
+                <button class="btn-primary" type="submit">Create Account</button>
+
+                <% if (error) { %>
+                    <p style="color: red; margin-top: 10px;"><%= error %></p>
+                <% } %>
+
+            </form>
+
+            <p style="margin-top: 20px;">
+                <a href="/login">Back to Login</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

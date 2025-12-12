@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Exercises</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+
+<h1>Search Exercises</h1>
+
+<p><a href="/">Home</a> | <a href="/exercises">Back to Exercises</a></p>
+<form action="/exercises/search" method="GET">
+
+    <label>Body Part:</label><br>
+    <select name="body_part">
+        <option value="">-- Any --</option>
+        <option value="elbow"     <%= body_part === "elbow" ? "selected" : "" %>>Elbow</option>
+        <option value="shoulder"  <%= body_part === "shoulder" ? "selected" : "" %>>Shoulder</option>
+        <option value="knee"      <%= body_part === "knee" ? "selected" : "" %>>Knee</option>
+        <option value="lower_back" <%= body_part === "lower_back" ? "selected" : "" %>>Lower Back</option>
+    </select><br><br>
+
+    <label>Difficulty:</label><br>
+    <select name="difficulty">
+        <option value="">-- Any --</option>
+        <option value="easy"   <%= difficulty === "easy" ? "selected" : "" %>>Easy</option>
+        <option value="medium" <%= difficulty === "medium" ? "selected" : "" %>>Medium</option>
+        <option value="hard"   <%= difficulty === "hard" ? "selected" : "" %>>Hard</option>
+    </select><br><br>
+
+    <label>Keyword (name or instructions):</label><br>
+    <input type="text" name="keyword" value="<%= keyword %>"><br><br>
+
+    <button type="submit">Search</button>
+</form>
+
+<hr>
+<h2>Search Results</h2>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Name</th>
+        <th>Body Part</th>
+        <th>Difficulty</th>
+        <th>Instructions</th>
+    </tr>
+
+    <% exercises.forEach(ex => { %>
+        <tr>
+            <td><%= ex.name %></td>
+            <td><%= ex.body_part %></td>
+            <td><%= ex.difficulty %></td>
+            <td><%= ex.instructions %></td>
+        </tr>
+    <% }) %>
+</table>
+</body>
+</html>

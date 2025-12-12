@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rehab Progress Tracker</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <h1>Rehab Exercise & Progress Tracker</h1>
+    </header>
+
+    <div class="container">
+
+        <% if (user) { %>
+
+            <div class="welcome-box">
+                <p>Welcome, <strong><%= user.username %></strong>!</p>
+                <a class="btn-logout" href="/logout">Logout</a>
+            </div>
+
+            <div class="card">
+                <h2>Exercises</h2>
+                <ul>
+                    <li><a href="/exercises">View All Exercises</a></li>
+                    <li><a href="/exercises/add">Add New Exercise</a></li>
+                    <li><a href="/exercises/search">Search Exercises</a></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>Your Logs</h2>
+                <ul>
+                    <li><a href="/logs">View Your Logs</a></li>
+                    <li><a href="/logs/add">Add New Log</a></li>
+                    <li><a href="/logs/search">Search Logs</a></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>About</h2>
+                <p><a href="/about">Learn more about the project</a></p>
+            </div>
+
+        <% } else { %>
+
+            <div class="card centered">
+                <p>You are not logged in.</p>
+
+                <div class="auth-buttons">
+                    <a class="btn-primary" href="/login">Login</a>
+                    <a class="btn-secondary" href="/register">Register</a>
+                </div>
+
+                <p style="margin-top: 15px;">
+                    <a href="/about">About</a>
+                </p>
+            </div>
+
+        <% } %>
+
+    </div>
+
+</body>
+</html>

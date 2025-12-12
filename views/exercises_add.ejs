@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add a New Rehab Exercise</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <h1>Add a New Rehab Exercise</h1>
+    </header>
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="nav-links">
+                <a href="/">Home</a> |
+                <a href="/exercises">Back to Exercises</a>
+            </div>
+
+            <form action="/exercises/add" method="POST" class="form-box">
+
+                <label>Exercise Name:</label>
+                <input type="text" name="name" required>
+
+                <label>Body Part:</label>
+                <select name="body_part" required>
+                    <option value="">-- Select --</option>
+                    <option value="shoulder">Shoulder</option>
+                    <option value="elbow">Elbow</option>
+                    <option value="knee">Knee</option>
+                    <option value="lower_back">Lower Back</option>
+                </select>
+
+                <label>Difficulty:</label>
+                <select name="difficulty" required>
+                    <option value="">-- Select --</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+
+                <label>Instructions:</label>
+                <textarea name="instructions" rows="4" required></textarea>
+
+                <button type="submit" class="btn">Add Exercise</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

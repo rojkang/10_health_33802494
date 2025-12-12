@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Rehab Logs</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+
+<h1>Your Rehab Logs</h1>
+
+<p>
+    <a href="/">Home</a> |
+    <a href="/logs/add">Add New Log</a> |
+    <a href="/logs/search">Search Logs</a>
+</p>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Date</th>
+        <th>Exercise</th>
+        <th>Body Part</th>
+        <th>Pain Level</th>
+        <th>Notes</th>
+    </tr>
+
+    <% logs.forEach(log => { %>
+        <tr>
+            <td><%= log.log_date.toISOString().slice(0,10) %></td>
+            <td><%= log.exercise_name %></td>
+            <td><%= log.body_part %></td>
+            <td><%= log.pain_level %></td>
+            <td><%= log.notes %></td>
+        </tr>
+    <% }) %>
+</table>
+
+</body>
+</html>

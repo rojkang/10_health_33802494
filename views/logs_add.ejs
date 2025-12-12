@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Rehab Log</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+
+<h1>Add a New Rehab Log</h1>
+
+<p>
+    <a href="/">Home</a> |
+    <a href="/logs">Back to Logs</a>
+</p>
+
+<form action="/logs/add" method="POST">
+
+    <label>Exercise:</label><br>
+    <select name="exercise_id">
+        <% exercises.forEach(ex => { %>
+            <option value="<%= ex.id %>"><%= ex.name %></option>
+        <% }) %>
+    </select><br><br>
+
+    <label>Date:</label><br>
+    <input type="date" name="log_date"><br><br>
+
+    <label>Pain Level (0–10):</label><br>
+    <input type="number" name="pain_level" min="0" max="10"><br><br>
+
+    <label>Notes (optional):</label><br>
+    <textarea name="notes" rows="4" cols="40"></textarea><br><br>
+
+    <button type="submit">Add Log</button>
+</form>
+
+<% if (error) { %>
+    <p style="color:red;"><%= error %></p>
+<% } %>
+
+</body>
+</html>

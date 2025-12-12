@@ -1,0 +1,18 @@
+{
+  "name": "10_rehab_33802494",
+  "version": "1.0.0",
+  "description": "Rehab exercise library + progress log (Node/Express/EJS/MySQL)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-sanitizer": "^1.0.6",
+    "express-session": "^1.18.1",
+    "mysql2": "^3.11.5"
+  }
+}
